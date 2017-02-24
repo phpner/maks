@@ -1,0 +1,20 @@
+.modal-dialog{
+	width: 90%;
+}
+.imgIn{
+	width: 160px;
+	margin: 0 auto;
+	position: relative;
+	margin-bottom: 30px;
+}
+.imgIn .delImg{
+	position: absolute;
+    color: #900000;
+    font-size: 24px;
+    right: 0;
+}
+.imgIn .delImg:hover{
+	font-size: 28px;
+	color: #ff0000;
+	cursor: pointer;
+}

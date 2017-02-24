@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -19,6 +20,8 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script src="/js/jquery.min.js"></script>
+
 </head>
 <body>
 <div id="app">
@@ -35,15 +38,14 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                    <a class="navbar-brand" href="{{ url('/') }}">Перейти на сайт  </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;<li><a href="{{route('add_items')}}">Добавить товар</a></li>
+                        &nbsp;<li><a href="#">настройки сайта</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -77,11 +79,13 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+<script src="/vendor/jasekz/laradrop/js/enyo.dropzone.js"></script>
+<script src="/vendor/jasekz/laradrop/js/laradrop.js"></script>
+@yield('script')
 </body>
 </html>

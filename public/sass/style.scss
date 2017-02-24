@@ -28,7 +28,7 @@
 		height: 60px;
 		text-align: center;
 		background-color: rgba(52,78,247,1);
- 	@include filter-gradient(#344ef7, #f7ff00, horizontal);
+ 	@include filter-gradient(#ccc, #ccc, horizontal);
 	@include background-image(linear-gradient(140deg, rgba(247,255,0,1) 40%, rgba(255,255,255,1) 50%, rgba(52,78,247,1) 50%));
 		
 		#email{
@@ -52,6 +52,7 @@
 	.header-text{
 	    text-align: center;
 	    font-size: 250%;
+	    color: #fff;
 		@include background(linear-gradient(45deg, #e63faa 33%,#3a45de 66%,#30eb60));
 		display: block;
 		margin: 6% auto;
@@ -109,4 +110,37 @@
 	    letter-spacing: 1.3px;
 	    border-bottom: 3px solid #893081;
 	    padding: 20px 0;
+	}
+
+	#select{	
+		height: 34px;
+		width: 240px;
+		overflow: hidden;
+		@include border-radius(15px);
+		border: 1px solid #000;
+		@include box-shadow(0 0 5px 0px #f550a7);
+		margin: 20px;
+
+	select{
+			background: transparent;
+		   border: none;
+		   font-size: 14px;
+		   height: 29px; 
+		   width: 268px;
+		   outline: none;
+		   text-align: center;
+		   padding-left: 10px;
+		   font-weight: bold;
+	}
+	}
+	.items{
+		padding: 15px 0 0px 18px;
+		border: 1px solid #893081;
+		margin-bottom: 20px;
+		@include border-radius(15px);
+		.thumbnail{
+		width: 160px;
+	    float: left;
+	    margin-right: 40px;
+	}
 	}

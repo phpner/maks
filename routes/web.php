@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Routing\Router;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,10 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/', 'IndexController@index');
+
+Route::get('/get', 'IndexController@get_items_pagination');
+
+Route::post('/get/select', 'IndexController@get_items_by_select');
+
+Route::get('/admin', ['uses' =>'Admin\AdminController@index', 'as' => 'admin']);
+
+Route::group(['prefix' => 'admin'],function (){
+
+    Router::match(['get', 'post'],'add_items',['uses' => 'Admin\AdminController@add_items', 'as' => 'add_items']);
+});
