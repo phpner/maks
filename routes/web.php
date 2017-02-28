@@ -15,13 +15,22 @@ Auth::routes();
 
 Route::get('/', 'IndexController@index');
 
-Route::get('/get', 'IndexController@get_items_pagination');
 
-Route::post('/get/select', 'IndexController@get_items_by_select');
+Route::get('/get/select', 'IndexController@get_items_by_select');
 
 Route::get('/admin', ['uses' =>'Admin\AdminController@index', 'as' => 'admin']);
 
 Route::group(['prefix' => 'admin'],function (){
 
+        //getting for AJAX
     Router::match(['get', 'post'],'add_items',['uses' => 'Admin\AdminController@add_items', 'as' => 'add_items']);
+
+    // delete an item
+    Router::get('del_item/{id}',['uses' => 'Admin\AdminController@del_item', 'as' => 'del_item']);
+
+    //edite item
+    Router::get('edit_item/{id}',['uses' => 'Admin\AdminController@edit_item', 'as' => 'edit_item']);
+
+    //update_item
+    Router::post('update_item/{id}',['uses' => 'Admin\AdminController@update_item', 'as' => 'update_item']);
 });

@@ -16,12 +16,15 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
     public function index(){
-        return view('admin/admin');
+
+        $count = Item::all()->count();
+        $item = Item::orderby('id','desc')->paginate(10);
+
+        return view('admin/status',['items' => $item,'count' => $count]);
     }
     public function add_items(Request $request){
 
         if ($request->isMethod('post')){
-
 
             $item = new Item();
 
@@ -39,5 +42,37 @@ class AdminController extends Controller
 
         }
         return view('admin/add_items');
+    }
+
+    public function edit_item(Request $request){
+
+        $edit = Item::find($request->id);
+
+        return view('admin/edit_item',['items'=> $edit]);
+
+    }
+    public function del_item(Request $request){
+
+        $del = Item::find($request->id);
+
+        if ($del->delete()){
+
+            return redirect()->route('admin');
+        }
+    }
+    public function update_item(Request $request){
+
+        $update = Item::where('id',$request->id)->firstOrFail();
+
+        $update->title = $request->title;
+        $update->description	 = $request->description	;
+        $update->price = $request->price;
+        $update->img_link = $request->file;
+        $update->category_id = $request->category_id;
+
+        if ($update->save()){
+            return redirect()->route('admin');
+        }
+
     }
 }

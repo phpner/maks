@@ -17,14 +17,16 @@
             @if(isset($items))
                 @foreach($items as $item)
                     <div class="col md-12 items clearfix">
-                        <div class="thumbnail">
-                            <a href="/uploads/{{$item->img_link}}">
-                            <img src="/uploads/_thumb_{{$item->img_link}}" alt="">
-                            </a>
-                        </div>
+                        @if(isset($item->img_link))
+                            <div class="thumbnail">
+                                <a class="img_popup" href="/uploads/{{$item->img_link}}">
+                                <img src="/uploads/_thumb_{{$item->img_link}}" alt="">
+                                </a>
+                            </div>
+                        @endif
                         <div class="title"><h4>{{$item->title}}</h4></div>
-                        <div class="description"><h5>{{$item->description}}</h5></div>
-                        <div class="delivery"><h5><img src="/img/delivery.png" alt="">&nbsp;{{$item->delivery}}</h5></div>
+                        <div class="description"><h5>{!! $item->description !!}</h5></div>
+                        <div class="delivery"><span class="price">{{$item->price}}</span></div>
                     </div>
                 @endforeach
             @endif
@@ -37,11 +39,14 @@
 @section('script')
     <script>
         $(function () {
+            var sel;
+
             $('#select select').on('change', function () {
                 var id = $(this).val();
+                 window.sel = $(this).val();
                 $.ajax({
                     url: '/get/select',
-                    method: "post",
+                    method: "get",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -50,39 +55,24 @@
                     $('.ajaxItems').html(data);
                     location.hash = '';
                     console.log('rrr');
-                }) .fail(function (jqXHR, exception) {
+                }).fail(function (jqXHR, exception) {
                     console.log(exception);
                 });
             });
 
-            $(document).on('click','#pagination .pagination a',function (e){
+           $(document).on('click','#pagination_select .pagination a',function (e){
                 e.preventDefault();
+
+                var cat = window.sel;
                 var id = $(this).attr('href').split('page=')[1];
                 $.ajax({
-                    url:'/get?page='+id
-                }).done(function (data) {
+                    url:'/get/select?page=' + id +'&id='+ cat
+                }).done(function (data){
 
                     $('.ajaxItems').html(data);
-
-                    location.hash = 'page=' + id;
-
-                    });
-            });
-
-            $(document).on('click','#pagination_select .pagination a',function (e){
-                e.preventDefault();
-                var id = $(this).attr('href').split('page=')[1];
-                $.ajax({
-                    url:'/get?page='+id
-                }).done(function (data) {
-
-                    $('.ajaxItems').html(data);
-
-                    location.hash = 'page=' + id;
 
                 });
             });
-
         });
 
     </script>

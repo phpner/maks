@@ -17,16 +17,16 @@
                 </div>
             </div>
             <div class="form-group text-center clearfix">
-                <div class="col-md-6 col-md-offset-3">
+                <div class="col-md-8 col-md-offset-2">
                     <label for="description">Описание продукта</label>
-                    <textarea name="description" class="form-control" cols="12"
+                    <textarea name="description" class="form-control" id="textarea" placeholder="Описание" cols="12"
                               rows="5">{{old('description')}}</textarea>
                 </div>
             </div>
             <div class="form-group">
                 <fieldset class="col-md-2 col-md-push-8">
                     <b>Категория</b>
-                    <select name="category_id" id="">
+                    <select class="celect-cat" name="category_id" id="">
                         <option value="1">Пакет майка</option>
                         <option value="2">Фасовочные пакеты</option>
                         <option value="3">Мусорные пакеты</option>
@@ -38,13 +38,13 @@
                     <label for="title">Цена</label>
                     <div class="input-group">
                         <input type="text" name="price" placeholder="цена" class="form-control">
-                        <span class="input-group-addon">грн.</span>
+                        <span class="input-group-addon"></span>
                     </div>
                 </div>
             </div>
         </div>
         <hr>
-        <div class="addImg container text-center"><img src="/uploads/_thumb_{{old('file')}}" alt=""></div>
+        <div class="addImg container text-center"></div>
 
         <div class="col-md-12 text-center">
             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -57,6 +57,7 @@
             <button type="submit" class="btn btn-success">
                 Сохранить
             </button>
+            <a href="{{route('admin')}}" class="btn btn-danger" > Отмена</a>
 
         </div>
 
@@ -85,7 +86,6 @@
     <script>
         $(function () {
 
-
             $('.laradrop').laradrop({
 
                 onInsertCallback: function (src) {
@@ -97,20 +97,15 @@
 
                         var img = src.src.slice(src.src.indexOf('b_') + 2);
 
-                        $('.addfile').html('<input type="text" name="file" value=' + img + '>');
+                        $('.addfile').html('<input type="hidden" name="file" value=' + img + '>');
                         $('#myModal').modal('toggle');
                     }
-
 
                     $('.delImg').on('click', function () {
 
                         $(this).parent('div').remove();
-
-                        var id = $(this).siblings('img').attr('id');
-
-                        console.log($('.form').find("+ src.id +"));
+                        $("input[name='file']").remove();
                     });
-
                 },
 
                 onErrorCallback: function (jqXHR, textStatus, errorThrown) {
@@ -121,6 +116,7 @@
                     // if you need a success status indicator, implement here
                 }
             });
+
 
         });
     </script>

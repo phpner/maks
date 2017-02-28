@@ -1,6 +1,9 @@
 .modal-dialog{
 	width: 90%;
 }
+.laradrop-thumbnail{
+	word-break: break-all;
+}
 .imgIn{
 	width: 160px;
 	margin: 0 auto;
@@ -18,3 +21,48 @@
 	color: #ff0000;
 	cursor: pointer;
 }
+.status .allItems{
+		display: table;
+		margin: 0 auto;
+		list-style: none;
+	}
+	.status .allItems li {
+		border-bottom: 1px dotted #99990a;
+		padding: 5px 0;
+	}
+	.status .title{
+		text-align: center;
+	    border-bottom: 2px solid;
+	    padding-bottom: 5px;
+	    color: #99990a;
+	}
+	.status .pagination{
+		margin: 0 auto;
+	    display: table;
+	    margin-top: 85px;
+	}
+	.status .delete{
+		color: #e56969 ;
+		padding: 3px;
+		border-radius: 34%;
+		background: rgba(169, 68, 20, 0.15);
+
+	}
+	.status .delete:hover{
+		color: red;
+		font-size: 105%;
+	}
+	.status .edit{
+		color:#005500;
+		padding: 3px;
+		border-radius: 34%;
+		background: rgba(0, 68, 20, 0.15);
+	}
+	.celect-cat{
+		height: 30px;
+		border: 2px solid #717072;
+		outline: none;
+		border-radius: 15px;
+		padding: 2px 12px;
+		margin-top: 9px;
+	}

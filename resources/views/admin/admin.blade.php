@@ -21,6 +21,8 @@
         ]) !!};
     </script>
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.magnific-popup.min.js"></script>
+    <script src="/js/tinymce/tinymce.min.js" ></script>
 
 </head>
 <body>
@@ -38,12 +40,13 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">Перейти на сайт  </a>
+                    <a target="_blank" class="navbar-brand" href="{{ url('/') }}">Перейти на сайт  </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav text-center">
+                        &nbsp;<li><a href="{{route('admin')}}">Админ панель</a></li>
                         &nbsp;<li><a href="{{route('add_items')}}">Добавить товар</a></li>
                         &nbsp;<li><a href="#">настройки сайта</a></li>
                     </ul>
@@ -86,6 +89,18 @@
     <script src="{{ asset('js/app.js') }}"></script>
 <script src="/vendor/jasekz/laradrop/js/enyo.dropzone.js"></script>
 <script src="/vendor/jasekz/laradrop/js/laradrop.js"></script>
+<script>
+    $(function () {
+        tinymce.init({
+            selector: '#textarea',
+            language: 'ru',
+            plugins: "emoticons textcolor",
+            toolbar: "emoticons | forecolor | backcolor",
+
+
+        });
+    })
+</script>
 @yield('script')
 </body>
 </html>
