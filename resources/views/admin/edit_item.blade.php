@@ -1,13 +1,13 @@
 @extends('admin.admin')
 @section('content')
     @if(isset($items))
-        <form method="post" action="/admin/update_item/{{$items->id}}">
+        <form class="form" method="post" action="/admin/update_item/{{$items->id}}">
             {{csrf_field()}}
             <div class="container">
                 <div class="form-group text-center clearfix">
                     <div class="col-md-6 col-md-offset-3">
-                        <label for="title">Название продукта </label>
-                        <input type="text" name="title" placeholder="Название продукта" value="{{$items->title}}"
+                        <label for="title">Название товара</label>
+                        <input type="text" name="title" placeholder="Название товара" value="{{$items->title}}"
                                class="form-control">
 
                         @if($errors->has('title'))
@@ -49,9 +49,11 @@
             </div>
             <hr>
             <div class="addImg container text-center">
+                @if(isset($items->img_link))
                 <div class="imgIn thumbnail"><span class="glyphicon glyphicon-remove-sign delImg"></span>
-                    <img id='{{$items->id}}' class="added" src='/uploads/_thumb_{{$items->img_link}}'>
+                        <img id='{{$items->id}}' class="added" src='/uploads/_thumb_{{$items->img_link}}'>
                 </div>
+                @endif
 
             </div>
 
@@ -99,6 +101,26 @@
 @section('script')
     <script>
         $(function () {
+            $(".form").validate({
+                rules: {
+                    title: {
+                        required: true
+                    },
+                    category: {
+                        required: true
+                    }
+                },
+                messages: {
+                    title: {
+                        required: 'Название товара обязательно!'
+                    },
+                    category: {
+                        required: "Выберите категорию!"
+                    }
+                },
+                errorClass: 'alert-danger',
+
+            });
 
 
             $('.laradrop').laradrop({

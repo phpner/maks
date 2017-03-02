@@ -29,7 +29,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <script src="/js/tinymce/tinymce.min.js" ></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/lightbox.js" ></script>
 
     <!-- Scripts -->
     <script>
@@ -37,13 +38,11 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
-    <script src="/js/jquery.min.js"></script>
     @yield('script')
 </head>
 <body>
 <div id="app">
     @include('.layouts.header')
-
         @yield('content')
     @include('layouts.footer')
 </div>
@@ -51,27 +50,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 <script src="/js/jquery.magnific-popup.min.js"></script>
-<script>
-    $(function () {
-        $(document).on('click','.img_popup',function (e) {
-            e.preventDefault();
-            $('.img_popup').magnificPopup({
-                type: 'image',
-                closeOnContentClick: true,
-                closeBtnInside: false,
-                fixedContentPos: true,
-                mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-                image: {
-                    verticalFit: true
-                },
-                zoom: {
-                    enabled: true,
-                    duration: 300 // don't foget to change the duration also in CSS
-                }
-            });
-        });
 
-       });
-</script>
 </body>
 </html>

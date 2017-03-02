@@ -1,12 +1,12 @@
 @extends('admin.admin')
 @section('content')
-    <form method="post" action="/admin/add_items">
+    <form class="form" method="post" action="/admin/add_items">
         {{csrf_field()}}
         <div class="container">
             <div class="form-group text-center clearfix">
                 <div class="col-md-6 col-md-offset-3">
-                    <label for="title">Название продукта </label>
-                    <input type="text" name="title" placeholder="Название продукта" class="form-control">
+                    <label for="title">Название товара</label>
+                    <input type="text" name="title" placeholder="Название товара" class="form-control">
 
                     @if($errors->has('title'))
                         <div class="alert alert-danger" role="alert">
@@ -85,6 +85,26 @@
 @section('script')
     <script>
         $(function () {
+                $(".form").validate({
+                    rules: {
+                        title: {
+                            required: true
+                        },
+                        category: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        title: {
+                            required: 'Название товара обязательно!'
+                        },
+                        category: {
+                            required: "Выберите категорию!"
+                        }
+                    },
+                    errorClass: 'alert-danger',
+
+                });
 
             $('.laradrop').laradrop({
 

@@ -21,8 +21,8 @@
         ]) !!};
     </script>
     <script src="/js/jquery.min.js"></script>
-    <script src="/js/jquery.magnific-popup.min.js"></script>
     <script src="/js/tinymce/tinymce.min.js" ></script>
+
 
 </head>
 <body>
@@ -48,15 +48,14 @@
                     <ul class="nav navbar-nav text-center">
                         &nbsp;<li><a href="{{route('admin')}}">Админ панель</a></li>
                         &nbsp;<li><a href="{{route('add_items')}}">Добавить товар</a></li>
-                        &nbsp;<li><a href="#">настройки сайта</a></li>
+                        &nbsp;<li><a href="{{route('settings')}}">настройки сайта</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('login') }}">Выход</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -86,18 +85,26 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="/vendor/jasekz/laradrop/js/enyo.dropzone.js"></script>
 <script src="/vendor/jasekz/laradrop/js/laradrop.js"></script>
+<script src="/js/jquery.validate.min.js" ></script>
 <script>
     $(function () {
         tinymce.init({
             selector: '#textarea',
             language: 'ru',
-            plugins: "emoticons textcolor",
-            toolbar: "emoticons | forecolor | backcolor",
+            plugins: "emoticons colorpicker textcolor",
 
+            toolbar: "emoticons" | " backcolor" |"textcolor",
 
+        });
+
+        var url = location.href;
+        var a = $('.navbar-nav li a').each(function () {
+            if(this.href == url){
+                $(this).css('background','rgba(119, 119, 119,0.5)')
+            }
         });
     })
 </script>
