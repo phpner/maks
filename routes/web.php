@@ -15,7 +15,6 @@ Auth::routes();
 
 Route::get('/', 'IndexController@index');
 
-
 Route::get('/get/select', 'IndexController@get_items_by_select');
 
 Route::get('/admin', ['uses' =>'Admin\AdminController@index', 'as' => 'admin']);
@@ -40,4 +39,7 @@ Route::group(['prefix' => 'admin'],function (){
 
     //edit user from admin
     Router::post('settingsEditUser',['uses' => 'Admin\SettingsController@settingsEditUser', 'as' => 'create']);
+
+    //save header img
+    Router::post('settings/saveHeaher',['uses' => 'Admin\SettingsController@settingsSaveHeaderImg', 'as' => 'settingsSaveHeaderImg']);
 });

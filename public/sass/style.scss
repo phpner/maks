@@ -131,10 +131,9 @@
 	    }
 	}
 .price{
-	background: #ccd0d3;
+	background: rgba(204, 208, 211, 0.36);
 	padding: 5px 10px;
 	border-radius: 10px;
-	border: 1px solid;
 }
 	#select{	
 		height: 34px;
@@ -185,5 +184,12 @@
 		    right: 0;
 		    font-size: 60%;
 	}
+	}
+	.enter{
+		font-size: 50%;
+		margin-left: 38px;
+		bottom: 0;
+		position: absolute;
+		left: 0;
 	}
 

@@ -20,6 +20,9 @@
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#imdChanch">
                     редактировать
                 </button>
+                <button type="button" class="btn btn-success btn-lg saveAjax">
+                    Сохранить
+                </button>
             </div>
             <div class="modal fade" id="imdChanch" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -71,6 +74,26 @@
                     alert('An error occured: ' + errorThrown);
                 }
             });
+
+            $('.saveAjax').on("click",function (){
+
+                var img = $('.settingsImg').attr('src');
+
+                $.ajax({
+                    url: '/admin/settings/saveHeaher',
+                    method: 'post',
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: img
+                }).done(function (data){
+
+                    console.log(data);
+
+                }).fail(function (err) {
+                    console.log(err);
+                });
+            });
+
+
 
             $('#formRegFromSettings').on('submit',function (e) {
 

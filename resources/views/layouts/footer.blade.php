@@ -8,5 +8,11 @@
         <div class="row power">
             power by <a href="http://phpner.in.ua">phpner</a>
         </div>
+        @if(Auth::check())
+            <div class="enter"><a href="/admin">Вы вошли как {{Auth::user()->name}} . Перейти в админ панель</a></div>
+            @else
+        <div class="enter"><a href="/login">Вход .</a></div>
+
+        @endif
     </nav>
 </footer>

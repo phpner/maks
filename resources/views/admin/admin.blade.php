@@ -48,7 +48,7 @@
                     <ul class="nav navbar-nav text-center">
                         &nbsp;<li><a href="{{route('admin')}}">Админ панель</a></li>
                         &nbsp;<li><a href="{{route('add_items')}}">Добавить товар</a></li>
-                        &nbsp;<li><a href="{{route('settings')}}">настройки сайта</a></li>
+                        {{--&nbsp;<li><a href="{{route('settings')}}">настройки сайта</a></li>--}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -67,7 +67,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Выход
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

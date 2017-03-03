@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\Models\Setting;
 
 class SettingsController extends Controller
 {
@@ -13,7 +14,16 @@ class SettingsController extends Controller
 
     public function settingsOfSite(){
 
+        $settings = Setteng::all();
+
         return view('admin/settings',['users'=>User::all()]);
+    }
+
+    public function getSettings(){
+
+        $settings = Setting::all();
+
+        view('layouts/header',['settings' => $settings]);
     }
 
     protected function create(Request $data)
@@ -40,5 +50,8 @@ class SettingsController extends Controller
     public function settingsEditUser(Request $request)
     {
 
+    }
+    public function settingsSaveHeaderImg(){
+        return 'dddfkk';
     }
 }
