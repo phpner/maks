@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=1000", initial-scale="1">
 
 <meta property="og:image" content="http://maks.fermaeko.com/img/header_for_share.jpg" />
 <meta property="og:image:width" content="604" />

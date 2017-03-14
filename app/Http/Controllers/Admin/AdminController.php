@@ -8,20 +8,36 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Item;
 
+/**
+ * Class AdminController
+ * @package App\Http\Controllers\Admin
+ */
 class AdminController extends Controller
 {
 
+
+    /**
+     * AdminController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(){
 
         $count = Item::all()->count();
-        $item = Item::orderby('id','desc')->paginate(10);
-
+        $item = Item::orderby('order_item')->get();
         return view('admin/status',['items' => $item,'count' => $count]);
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function add_items(Request $request){
 
         if ($request->isMethod('post')){
@@ -44,6 +60,10 @@ class AdminController extends Controller
         return view('admin/add_items');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit_item(Request $request){
 
         $edit = Item::find($request->id);
@@ -51,6 +71,11 @@ class AdminController extends Controller
         return view('admin/edit_item',['items'=> $edit]);
 
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function del_item(Request $request){
 
         $del = Item::find($request->id);
@@ -60,6 +85,11 @@ class AdminController extends Controller
             return redirect()->route('admin');
         }
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update_item(Request $request){
 
         $update = Item::where('id',$request->id)->firstOrFail();

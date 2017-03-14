@@ -1,57 +1,76 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use App\User;
 use App\Models\Setting;
+use App\Models\Item;
 
 class SettingsController extends Controller
 {
 
 
-    public function settingsOfSite(){
-
-        $settings = Setteng::all();
-
-        return view('admin/settings',['users'=>User::all()]);
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function settingsOfSite()
+    {
+        $settings = Setting::all();
+        return view('admin/settings',['users'=>User::all(),'settings' => $settings ]);
     }
 
-    public function getSettings(){
-
+    public function getSettings()
+    {
         $settings = Setting::all();
-
         view('layouts/header',['settings' => $settings]);
     }
 
-    protected function create(Request $data)
+    public function settingsSaveHeaderImg(Request $request)
     {
-
-        $val =  Validator::make($data->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-           /* 'password' => 'required|min:6|confirmed',*/
-        ]);
-
-        if ($val->fails()){
-            return response()->view('errors/costomErroesFails',['messages'=> $val]);
-            }
-
-     /*    User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);*/
-
-       return response()->json(['status' => '200', 'users'=>User::all()]);
-    }
-    public function settingsEditUser(Request $request)
-    {
+            $header =  Setting::where('id',3)->update([
+                'header' => $request->img,
+                'logo' => $request->logo]);
+            return 200;
 
     }
-    public function settingsSaveHeaderImg(){
-        return 'dddfkk';
+
+    public function saveOrderFromStatus(Request $request)
+    {                
+            parse_str($request->ser, $arr);
+            $order = 0;
+            foreach ($arr['item'] as $k) {
+                Item::where('id',"=", (int) $k)->update(["order_item" => $order]);
+                 $order++; 
+            }                       
+    }
+    public function saveInfoSite(Request $request){
+        $fileName = false;
+        if(Input::hasFile('pricelist'))
+        {
+        $fileExt = Input::file('pricelist')->getClientOriginalExtension();
+            $fileName = Input::file('pricelist')->getClientOriginalName();
+            \Illuminate\Support\Facades\Request::file('pricelist')
+                                         ->move(public_path().'/priceList', $fileName);    
+        }
+       if ($fileName == false)
+        {
+            $fileName =  \Illuminate\Support\Facades\DB::table('settings')
+                                     ->select('pricelist')
+                                     ->where('id', '=', 3)
+                                     ->get();
+        }
+       $set = Setting::where('id',3)->update([
+            'email'=> $request->email,
+             "tel"=> $request->tel,
+             "mode"=> $request->mode,
+             "textunder" => $request->textunder,
+             "pricelist" => $fileName
+             ]);
+        return redirect()->back();
     }
 }

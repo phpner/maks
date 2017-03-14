@@ -16,18 +16,19 @@ class IndexController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $items = Item::orderby('id','desc')->paginate(8);
-        return view('index', ['items' => $items]);
+    { 
+        $settings = Setting::where("id", 3)->get();
+        $items = Item::orderby('order_item')->paginate(8);
+        return view('index', ['items' => $items,'setting' => $settings]);
     }
 
     public function get_items_by_select(Request $request){
 
         //Обработка Ajax запроса
               if ($request->id == 0){
-                  $items = Item::orderby('id','desc')->paginate(8);
+                  $items = Item::orderby('order_item')->paginate(8);
               }else{
-                  $items = Item::where('category_id',$request->id)->orderby('id','desc')->paginate(8);
+                  $items = Item::where('category_id',$request->id)->orderby('order_item')->paginate(8);
               }
 
 

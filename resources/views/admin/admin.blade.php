@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=720">
+
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -22,6 +23,7 @@
     </script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/tinymce/tinymce.min.js" ></script>
+
 
 
 </head>
@@ -48,7 +50,7 @@
                     <ul class="nav navbar-nav text-center">
                         &nbsp;<li><a href="{{route('admin')}}">Админ панель</a></li>
                         &nbsp;<li><a href="{{route('add_items')}}">Добавить товар</a></li>
-                        {{--&nbsp;<li><a href="{{route('settings')}}">настройки сайта</a></li>--}}
+                        <li><a href="{{route('settings')}}">настройки сайта</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -89,6 +91,7 @@
 <script src="/vendor/jasekz/laradrop/js/enyo.dropzone.js"></script>
 <script src="/vendor/jasekz/laradrop/js/laradrop.js"></script>
 <script src="/js/jquery.validate.min.js" ></script>
+<script src="/js/jquery-ui.min.js" ></script>
 <script>
     $(function () {
         tinymce.init({

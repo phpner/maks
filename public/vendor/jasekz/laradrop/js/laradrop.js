@@ -1,4 +1,4 @@
-jQuery.fn.laradrop = function(options) {	
+jQuery.fn.laradrop = function(options) {
     Dropzone.autoDiscover = false;
     options = options == undefined ? {} : options;
 
@@ -67,7 +67,7 @@ jQuery.fn.laradrop = function(options) {
 				});
 		   })
 		   
-		   // 'add files' 
+		   // 'add files'		  
 		   if(fileHandler) {
 			   dz = new Dropzone('#'+laradropContainer.attr('id')+' .btn-add-files', { 
 			        url: fileHandler,
@@ -211,44 +211,7 @@ jQuery.fn.laradrop = function(options) {
 		    
 		    displayBreadCrumbs();
 		    
-		    laradropContainer.find('.laradrop-draggable').draggable({
-			      cancel: ".non-draggable", 
-			      revert: "invalid", 
-			      containment: "document",
-			      helper: "clone",
-			      cursor: "move",
 
-			      cursorAt: { top: 30, left: 15 },
-			      helper: function( event ) {
-			        return $( "<div class='panel panel-info' >&nbsp; &#8631; &nbsp;</div>" );
-			      }
-			});
-			
-		    laradropContainer.find('.laradrop-droppable').droppable({
-			      accept: ".laradrop-draggable",
-			      hoverClass: "laradrop-droppable-hover",
-			      activeClass: "laradrop-droppable-highlight",
-			      drop: function( event, ui ) {
-			        var draggedId = ui.draggable.attr('file-id'),
-		    			droppedId = jQuery(this).attr('file-id');
-			    	
-					jQuery.ajax({
-					    url: fileMoveHandler,
-					    type: 'POST',
-					    dataType: 'json',
-				        headers: { 'X-CSRF-TOKEN': csrfToken },
-				        data: {'draggedId':draggedId, 'droppedId':droppedId, 'customData': JSON.stringify(customData)},
-					    success: function(res) {							    
-							jQuery.get(fileSrc+'?pid='+currentFolderId, function(res){
-								displayMedia(res);
-							});
-					    }, 
-					    error: function(jqXHR,textStatus,errorThrown){
-					    	handleError(jqXHR,textStatus,errorThrown);
-					    }
-					});
-			      }
-			});
 	}	
 	
 	function displayBreadCrumbs(){
@@ -306,4 +269,9 @@ jQuery.fn.laradrop = function(options) {
 	}
 	
 	return laradropObj;
+}
+
+$.fn.laradrop.destroy = function(){
+            $('.laradrop-container').remove();
+            console.log(this);
 }
